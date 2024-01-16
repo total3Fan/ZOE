@@ -1,0 +1,20 @@
+/*##########################################################################
+MYSQL/MARIADB CODE FOR TABLE GENERATION
+© 2023 Zoe is licensed under Attribution-ShareAlike 4.0 International 
+##########################################################################*/
+
+
+
+CREATE TABLE tradingview_alerts (
+  tradingview_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+  tradingview_updated TIMESTAMP DEFAULT current_timestamp(),
+  tradingview_symbol VARCHAR(50),
+  trade_info VARCHAR(255),
+  tradingview_trade VARCHAR(20),
+  tradingview_timeline SMALLINT,
+  tradingview_price FLOAT,
+  tradingview_stop FLOAT,
+  tradingview_target FLOAT,
+  tradingview_status TINYINT DEFAULT '0',
+  tradingview_trend VARCHAR(10)
+);

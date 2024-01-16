@@ -1,0 +1,155 @@
+<?php
+
+/*#################################################################################
+THIS FILE ALLOWS YOU TO CHANGE SETTINGS FOR THE APPLICATION, PLEASE READ COMMENTS
+© 2023 Zoe is licensed under Attribution-ShareAlike 4.0 International 
+START HERE FOR VARIABLES TO CHANGE OR UPDATE
+##########################################################################*/
+
+
+// WHAT LEVERAGE DO YOU WANT TO USE ON YOUR TRADES?
+
+$leverage 				= 20; 
+
+// WHAT TRADE MINIMUM TIMELINES DO YOU WANT TO ACCEPT AND LIST TRADES FOR 
+// ANY TRADE TIMELINE THAT IS BELOW THIS NUMBER WILL NOT BE LISTED
+// 60 = 1HOUR
+
+$tradeTimelineMin		= 60;
+
+// HOW LONG DO YOU WANT TRADES TO SIT IN THE DATABASE FOR ONCE LISTED, AS THEY WILL RETRIGGER IF CLOSED AND WITHIN THIS TIME THRESHOLD
+// IF YOU HAVE 30 THEN THEY WILL BE REMOVED AFTER 30 MINUTES
+// IF YOU HAVE 1 THEN THEY WILL BE REMOVED AFTER 1 MINUTE
+
+$leaveDatabaseTrades 	= 30;
+
+// MAXIMUM TRADES ALLOWED AT ONE TIME (CHECK YOUR BUDGETS AGAINST LIQUIDATION)
+
+$maxPairings 			= 8;
+
+// WHEN UNREALISED PROFIT IS GREATER THAN THE FOLLOWING IT WILL CLOSE ALL TRADES AND START AGAINST
+// 100 = 100% OF BALANCE
+// 50 = 50% OF BALANCE
+// 10 = 10% OF BALANCE
+
+$cutOffPercent					=  10;
+
+
+// WHAT BUDGET DO YOU WANT TO SPEND ON EACH TRADE, THIS INCLUDES ANY LEVERAGE YOU HAVE SET 
+
+$spendBudget			= 100;
+
+
+// OVER-RIDE INITIAL STOP LOSS PERCENTAGE
+// DEFAULT IS 0.5% : YOU CAN PLACE A NEW PERCENTAGE IF DESIRED (EXCLUDES LEVERAGE)
+
+$stopLossPercent			= 0.5;
+
+// OVER-RIDE INITIAL TARGET PERCENTAGE
+// DEFAULT IS 0.5FIB : YOU CAN PLACE A NEW PERCENTAGE IF DESIRED (EXCLUDES LEVERAGE)
+
+$targetPointPercent			= 10;
+
+	
+// THESE ARE THE TRAILING STOP LOSS SETTINGS FOR LONG TRADES, CHANGE AS REQUIRED	
+// ['min' => 50,	'max' => 100,	'desiredProfit' => 10],
+
+// WHEN % OF PROFIT IS EQUAL OR OVER THE 50% MARK AND BELOW OR EQUAL TO THE 100% 
+// ONCE THE FILE tv_positions.php IS TRIGGERED, IT WILL MOVE THE SL TO TAKE 10% PROFIT
+// THEN WILL WAIT FOR THE NEXT MIN LEVEL TO MOVE THE SL AGAIN.
+	
+$profitThresholdsLong =   [
+								
+								 
+								['min' => 50,	'max' => 240,	'desiredProfit' => 3],
+								['min' => 240, 'max' => 400, 'desiredProfit' => 30],
+								['min' => 400, 'max' => 960, 'desiredProfit' => 50],
+								['min' => 960, 'max' => 1040, 'desiredProfit' => 300],
+								['min' => 1680, 'max' => 1760, 'desiredProfit' => 1520],
+								['min' => 1760, 'max' => 1840, 'desiredProfit' => 1600],
+								['min' => 1840, 'max' => 1920, 'desiredProfit' => 1680],
+								['min' => 1920, 'max' => 2000, 'desiredProfit' => 1750]
+								
+								
+];
+
+
+// THESE ARE THE TRAILING STOP LOSS SETTINGS FOR SHORT TRADES, CHANGE AS REQUIRED	
+// ['min' => 50,	'max' => 80,	'desiredProfit' => 3],
+
+// WHEN % OF PROFIT IS EQUAL OR OVER THE 50% MARK AND BELOW OR EQUAL TO THE 80% 
+// ONCE THE FILE tv_positions.php IS TRIGGERED, IT WILL MOVE THE SL TO TAKE 3% PROFIT
+// THEN WILL WAIT FOR THE NEXT MIN LEVEL TO MOVE THE SL AGAIN.
+
+
+$profitThresholdsShort =   [
+									
+									
+									
+								 
+								['min' => 50,	'max' => 80,	'desiredProfit' => 3],
+								['min' => 240, 'max' => 320, 'desiredProfit' => 140],
+								['min' => 320, 'max' => 400, 'desiredProfit' => 220],
+								['min' => 400, 'max' => 480, 'desiredProfit' => 290],
+								['min' => 480, 'max' => 560, 'desiredProfit' => 370],
+								['min' => 560, 'max' => 640, 'desiredProfit' => 450],
+								['min' => 640, 'max' => 720, 'desiredProfit' => 520],
+								['min' => 720, 'max' => 800, 'desiredProfit' => 600],
+								['min' => 800, 'max' => 880, 'desiredProfit' => 680],
+								['min' => 880, 'max' => 960, 'desiredProfit' => 750],
+								['min' => 960, 'max' => 1040, 'desiredProfit' => 830],
+								['min' => 1040, 'max' => 1120, 'desiredProfit' => 910],
+								['min' => 1120, 'max' => 1200, 'desiredProfit' => 990],
+								['min' => 1200, 'max' => 1280, 'desiredProfit' => 1060],
+								['min' => 1280, 'max' => 1360, 'desiredProfit' => 1140],
+								['min' => 1360, 'max' => 1440, 'desiredProfit' => 1220],
+								['min' => 1440, 'max' => 1520, 'desiredProfit' => 1290],
+								['min' => 1520, 'max' => 1600, 'desiredProfit' => 1370],
+								['min' => 1600, 'max' => 1680, 'desiredProfit' => 1450],
+								['min' => 1680, 'max' => 1760, 'desiredProfit' => 1520],
+								['min' => 1760, 'max' => 1840, 'desiredProfit' => 1600],
+								['min' => 1840, 'max' => 1920, 'desiredProfit' => 1680],
+								['min' => 1920, 'max' => 2000, 'desiredProfit' => 1750]
+								
+								
+								   
+							
+];
+/*#######################################################################################
+DO NOT TOUCH BELOW
+#######################################################################################*/
+$futuresBalance = futuresBalances($user_bnKey, $user_bnSecret, 'USDT');
+
+
+$cutOff 						= ($futuresBalance * ($cutOffPercent / 100));
+
+// For short positions
+$stopLossShortFigure = 1 + ($stopLossPercent / 100); // Stop loss for short should be positive
+$targetPointShortFigure = 1 - ($targetPointPercent / 100); // Target for short should be negative
+
+// For long positions
+$stopLossLongFigure = 1 - ($stopLossPercent / 100); // Stop loss for long should be negative
+$targetPointLongFigure = 1 + ($targetPointPercent / 100); // Target for long should be positive
+
+
+
+$maxBudgetPerPairing 	= number_format(($spendBudget),0,'.','');
+
+$maxSpendBudget 		= $spendBudget;
+
+$spendBudgetAmt			= ($spendBudget);
+
+$dateToCheck = date('Y-m-d');
+// Change this to your desired date
+									
+// Create a DateTime object for the dateToCheck
+$dateTime = new DateTime($dateToCheck);
+
+// Loop through the last 7 days up to the dateToCheck
+
+// equates your budget
+$futuresExposure		= (($futuresBalance * $leverage));
+
+
+
+?>
