@@ -56,6 +56,7 @@ Setup:
 Recommended Apache 2.0, PHP8.1+, MariaDB/MySQL
 
 Cron Enabled
+MySQLi Enabled
 
 
 Installation:
