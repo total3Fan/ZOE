@@ -88,6 +88,10 @@ $stmt->bind_param("is", $tradeTimelineMin, $symbol);
 // Execute the statement
 $stmt->execute();
 
+$stopPriceFloat = floatval($stopPrice);
+$targetPriceFloat = floatval($targetPrice);
+$priceFloat = floatval($price);
+
 // Prepare an INSERT statement with placeholders
 $sqlInsertUsage = "INSERT INTO tradingview_alerts (
     trade_info,
@@ -101,7 +105,7 @@ $sqlInsertUsage = "INSERT INTO tradingview_alerts (
 $stmt = $conn->prepare($sqlInsertUsage);
 
 // Bind the parameters to the statement
-$stmt->bind_param("sssisss", $inputData, $symbol, $trade, $timeline, $stopPrice, $targetPrice, $price);
+$stmt->bind_param("sssisss", $inputData, $symbol, $trade, $timeline, $stopPriceFloat, $targetPriceFloat, $priceFloat);
 
 // Execute the statement
 $stmt->execute();
