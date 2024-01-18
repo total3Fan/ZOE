@@ -45,18 +45,30 @@ if (count($values) == 7) {
 		 $priceBottom 	= $priceA;
 	 }
 	 $getTickSize = getTickSize($symbol);
+	 
+	 
+	// For short positions
+	
+	// For long positions
+	
+
 	 if($trade == 'short')
 	 {
 		 
-		 
-		  $stopPrice = number_format(($price * $stopLossShortFigure), $getTickSize, '.', '');
-			$targetPrice = number_format(($price * $targetPointShortFigure), $getTickSize, '.', '');
+		$stopLossShortFigure 	= 1 + ($stopLossPercent / 100); // Stop loss for short should be positive
+		$targetPointShortFigure = 1 - ($targetPointPercent / 100); // Target for short should be negative
+		$targetPrice 			= $priceBottom;
+		$stopPrice = number_format(($priceTop * $stopLossShortFigure), $getTickSize, '.', '');
+													
 		 
 	 }
 	 elseif($trade == 'long')
 	 {
-		  $stopPrice = number_format(($currentPrice * $stopLossLongFigure), $getTickSize, '.', '');
-		  $targetPrice = number_format(($currentPrice * $targetPointLongFigure), $getTickSize, '.', '');
+		$stopLossLongFigure 	= 1 - ($stopLossPercent / 100); // Stop loss for long should be negative
+		$targetPointLongFigure 	= 1 + ($targetPointPercent / 100); // Target for long should be positive
+		$targetPrice 			= $priceTop;
+		$stopPrice = number_format(($priceTop * $stopLossLongFigure), $getTickSize, '.', '');
+		
 	 }
 	
 	 
