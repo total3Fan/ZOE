@@ -67,7 +67,7 @@ if (count($values) == 7) {
 		$stopLossLongFigure 	= 1 - ($stopLossPercent / 100); // Stop loss for long should be negative
 		$targetPointLongFigure 	= 1 + ($targetPointPercent / 100); // Target for long should be positive
 		$targetPrice 			= $priceTop;
-		$stopPrice = number_format(($priceTop * $stopLossLongFigure), $getTickSize, '.', '');
+		$stopPrice = number_format(($priceBottom * $stopLossLongFigure), $getTickSize, '.', '');
 		
 	 }
 	
