@@ -57,17 +57,47 @@ if (count($values) == 7) {
 		 
 		$stopLossShortFigure 	= 1 + ($stopLossPercent / 100); // Stop loss for short should be positive
 		$targetPointShortFigure = 1 - ($targetPointPercent / 100); // Target for short should be negative
-		$targetPrice 			= $priceBottom;
-		$stopPrice = number_format(($priceTop * $stopLossShortFigure), $getTickSize, '.', '');
-													
-		 
+		if($overRideTarget == 1)
+		{
+			$targetPrice = number_format(($price * $targetPointShortFigure), $getTickSize, '.', '');
+		}
+		else
+		(
+			$targetPrice 			= $priceBottom;
+		)
+		
+		if($overRideSL == 1)
+		{
+			$stopPrice = number_format(($priceTop * $stopLossShortFigure), $getTickSize, '.', '');
+		}
+		else
+		(
+			$stopPrice = number_format(($priceTop * 0.5), $getTickSize, '.', '');
+		)
+		
 	 }
 	 elseif($trade == 'long')
 	 {
 		$stopLossLongFigure 	= 1 - ($stopLossPercent / 100); // Stop loss for long should be negative
 		$targetPointLongFigure 	= 1 + ($targetPointPercent / 100); // Target for long should be positive
-		$targetPrice 			= $priceTop;
-		$stopPrice = number_format(($priceBottom * $stopLossLongFigure), $getTickSize, '.', '');
+		
+		if($overRideTarget == 1)
+		{
+			$targetPrice = number_format(($price * $targetPointLongFigure), $getTickSize, '.', '');
+		}
+		else
+		(
+			$targetPrice 			= $priceTop;
+		)
+		
+		if($overRideSL == 1)
+		{
+			$stopPrice = number_format(($priceBottom * $stopLossLongFigure), $getTickSize, '.', '');
+		}
+		else
+		(
+			$stopPrice = number_format(($priceBottom * 0.5), $getTickSize, '.', '');
+		)
 		
 	 }
 	
@@ -88,7 +118,7 @@ if (count($values) == 7) {
     // Database connection code (assuming $config object is defined somewhere)
     $conn = mysqli_connect($hostname, $username, $password, $database);
 
-if($timeline > 10)
+if($timeline >= $tradeTimelineMin)
 {
 // Prepare a DELETE statement with placeholders
 $updateQuick = "DELETE FROM tradingview_alerts WHERE tradingview_timeline >= ? AND tradingview_symbol = ?";
