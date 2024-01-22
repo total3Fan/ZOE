@@ -15,13 +15,13 @@ $leverage 				= 20;
 // ANY TRADE TIMELINE THAT IS BELOW THIS NUMBER WILL NOT BE LISTED
 // 60 = 1HOUR
 
-$tradeTimelineMin		= 60;
+$tradeTimelineMin		= 10;
 
 // HOW LONG DO YOU WANT TRADES TO SIT IN THE DATABASE FOR ONCE LISTED, AS THEY WILL RETRIGGER IF CLOSED AND WITHIN THIS TIME THRESHOLD
 // IF YOU HAVE 30 THEN THEY WILL BE REMOVED AFTER 30 MINUTES
 // IF YOU HAVE 1 THEN THEY WILL BE REMOVED AFTER 1 MINUTE
 
-$leaveDatabaseTrades 	= 30;
+$leaveDatabaseTrades 	= 5;
 
 // MAXIMUM TRADES ALLOWED AT ONE TIME (CHECK YOUR BUDGETS AGAINST LIQUIDATION)
 
@@ -32,7 +32,7 @@ $maxPairings 			= 8;
 // 50 = 50% OF BALANCE
 // 10 = 10% OF BALANCE
 
-$cutOffPercent					=  10;
+$cutOffPercent					=  5;
 
 
 // WHAT BUDGET DO YOU WANT TO SPEND ON EACH TRADE, THIS INCLUDES ANY LEVERAGE YOU HAVE SET 
@@ -41,14 +41,19 @@ $spendBudget			= 100;
 
 
 // OVER-RIDE INITIAL STOP LOSS PERCENTAGE
+
+$overRideSL = 1;
 // DEFAULT IS 0.5% : YOU CAN PLACE A NEW PERCENTAGE IF DESIRED (EXCLUDES LEVERAGE)
 
-$stopLossPercent			= 0.5;
+$stopLossPercent = 0.5; // 0.5%
 
 // OVER-RIDE INITIAL TARGET PERCENTAGE
+
+$overRideTarget = 1;
 // DEFAULT IS 0.5FIB : YOU CAN PLACE A NEW PERCENTAGE IF DESIRED (EXCLUDES LEVERAGE)
 
-$targetPointPercent			= 10;
+$targetPointPercent = 25; // 10%
+
 
 	
 // THESE ARE THE TRAILING STOP LOSS SETTINGS FOR LONG TRADES, CHANGE AS REQUIRED	
@@ -61,8 +66,8 @@ $targetPointPercent			= 10;
 $profitThresholdsLong =   [
 								
 								 
-								['min' => 50,	'max' => 240,	'desiredProfit' => 3],
-								['min' => 240, 'max' => 400, 'desiredProfit' => 30],
+								['min' => 20, 'max' => 300, 'desiredProfit' => 3],
+								['min' => 300, 'max' => 400, 'desiredProfit' => 220],
 								['min' => 400, 'max' => 960, 'desiredProfit' => 50],
 								['min' => 960, 'max' => 1040, 'desiredProfit' => 300],
 								['min' => 1680, 'max' => 1760, 'desiredProfit' => 1520],
@@ -87,9 +92,8 @@ $profitThresholdsShort =   [
 									
 									
 								 
-								['min' => 50,	'max' => 80,	'desiredProfit' => 3],
-								['min' => 240, 'max' => 320, 'desiredProfit' => 140],
-								['min' => 320, 'max' => 400, 'desiredProfit' => 220],
+								['min' => 20, 'max' => 300, 'desiredProfit' => 3],
+								['min' => 300, 'max' => 400, 'desiredProfit' => 220],
 								['min' => 400, 'max' => 480, 'desiredProfit' => 290],
 								['min' => 480, 'max' => 560, 'desiredProfit' => 370],
 								['min' => 560, 'max' => 640, 'desiredProfit' => 450],
