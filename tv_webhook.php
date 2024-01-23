@@ -62,18 +62,18 @@ if (count($values) == 7) {
 			$targetPrice = number_format(($price * $targetPointShortFigure), $getTickSize, '.', '');
 		}
 		else
-		(
+		{
 			$targetPrice 			= $priceBottom;
-		)
+		}
 		
 		if($overRideSL == 1)
 		{
 			$stopPrice = number_format(($priceTop * $stopLossShortFigure), $getTickSize, '.', '');
 		}
 		else
-		(
+		{
 			$stopPrice = number_format(($priceTop * 0.5), $getTickSize, '.', '');
-		)
+		}
 		
 	 }
 	 elseif($trade == 'long')
@@ -86,18 +86,18 @@ if (count($values) == 7) {
 			$targetPrice = number_format(($price * $targetPointLongFigure), $getTickSize, '.', '');
 		}
 		else
-		(
+		{
 			$targetPrice 			= $priceTop;
-		)
+		}
 		
 		if($overRideSL == 1)
 		{
 			$stopPrice = number_format(($priceBottom * $stopLossLongFigure), $getTickSize, '.', '');
 		}
 		else
-		(
+		{
 			$stopPrice = number_format(($priceBottom * 0.5), $getTickSize, '.', '');
-		)
+		}
 		
 	 }
 	
