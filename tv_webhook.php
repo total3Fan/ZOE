@@ -54,17 +54,24 @@ if (count($values) == 7) {
 
 	 if($trade == 'short')
 	 {
-		 
-		$stopLossShortFigure 	= 1 + ($stopLossPercent / 100); // Stop loss for short should be positive
-		$targetPointShortFigure = 1 - ($targetPointPercent / 100); // Target for short should be negative
-		if($overRideTarget == 1)
-		{
-			$targetPrice = number_format(($price * $targetPointShortFigure), $getTickSize, '.', '');
-		}
-		else
-		{
-			$targetPrice 			= $priceBottom;
-		}
+		 $stopLossShortFigure 	= 1 + ($stopLossPercent / 100); // Stop loss for short should be positive
+				
+		 if($multiTarget == 1)
+			{
+				 $targetPointPercent  		=   $tradeShortsByTimeline[$timeline];
+				 $targetPointShortFigure 	= 1 - ($targetPointPercent / 100); // Target for short should be negative
+				 $targetPrice 				= number_format(($price * $targetPointShortFigure), $getTickSize, '.', '');
+			 }
+			 elseif($overRideTarget == 1)
+			{
+				 $targetPointShortFigure = 1 - ($targetPointPercent / 100); // Target for short should be negative
+				 $targetPrice = number_format(($price * $targetPointShortFigure), $getTickSize, '.', '');
+			}
+			else
+			{
+				$targetPrice 			= $priceBottom;
+			}
+		
 		
 		if($overRideSL == 1)
 		{
@@ -78,11 +85,18 @@ if (count($values) == 7) {
 	 }
 	 elseif($trade == 'long')
 	 {
+		 
 		$stopLossLongFigure 	= 1 - ($stopLossPercent / 100); // Stop loss for long should be negative
-		$targetPointLongFigure 	= 1 + ($targetPointPercent / 100); // Target for long should be positive
-		
-		if($overRideTarget == 1)
+		if($multiTarget == 1)
+		 {
+			 $targetPointPercent  	=   $tradeTargetsByTimeline[$timeline];
+			 $targetPointLongFigure = 1 + ($targetPointPercent / 100); // Target for long should be positive
+			 $targetPrice 			= number_format(($price * $targetPointLongFigure), $getTickSize, '.', '');
+	
+		 }
+		 elseif($overRideTarget == 1)
 		{
+			$targetPointLongFigure 	= 1 + ($targetPointPercent / 100); // Target for long should be positive
 			$targetPrice = number_format(($price * $targetPointLongFigure), $getTickSize, '.', '');
 		}
 		else
