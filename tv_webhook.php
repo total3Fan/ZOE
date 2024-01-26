@@ -56,7 +56,7 @@ if (count($values) == 7) {
 	 {
 		 $stopLossShortFigure 	= 1 + ($stopLossPercent / 100); // Stop loss for short should be positive
 				
-		 if($multiTarget == 1)
+		 if($multiTargets == 1)
 			{
 				 $targetPointPercent  		=   $tradeShortsByTimeline[$timeline];
 				 $targetPointShortFigure 	= 1 - ($targetPointPercent / 100); // Target for short should be negative
@@ -87,7 +87,7 @@ if (count($values) == 7) {
 	 {
 		 
 		$stopLossLongFigure 	= 1 - ($stopLossPercent / 100); // Stop loss for long should be negative
-		if($multiTarget == 1)
+		if($multiTargets == 1)
 		 {
 			 $targetPointPercent  	=   $tradeTargetsByTimeline[$timeline];
 			 $targetPointLongFigure = 1 + ($targetPointPercent / 100); // Target for long should be positive
