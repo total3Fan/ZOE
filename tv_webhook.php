@@ -59,12 +59,12 @@ if (count($values) == 7) {
 		 if($multiTargets == 1)
 			{
 				 $targetPointPercent  		=   $tradeShortsByTimeline[$timeline];
-				 $targetPointShortFigure 	= 1 - ($targetPointPercent / 100); // Target for short should be negative
+				 $targetPointShortFigure 	= 1 - (($targetPointPercent / $leverage) / 100); // Target for short should be negative
 				 $targetPrice 				= number_format(($price * $targetPointShortFigure), $getTickSize, '.', '');
 			 }
 			 elseif($overRideTarget == 1)
 			{
-				 $targetPointShortFigure = 1 - ($targetPointPercent / 100); // Target for short should be negative
+				 $targetPointShortFigure = 1 - (($targetPointPercent / $leverage) / 100); // Target for short should be negative
 				 $targetPrice = number_format(($price * $targetPointShortFigure), $getTickSize, '.', '');
 			}
 			else
@@ -90,13 +90,13 @@ if (count($values) == 7) {
 		if($multiTargets == 1)
 		 {
 			 $targetPointPercent  	=   $tradeTargetsByTimeline[$timeline];
-			 $targetPointLongFigure = 1 + ($targetPointPercent / 100); // Target for long should be positive
+			 $targetPointLongFigure = 1 + (($targetPointPercent / $leverage) / 100); // Target for long should be positive
 			 $targetPrice 			= number_format(($price * $targetPointLongFigure), $getTickSize, '.', '');
 	
 		 }
 		 elseif($overRideTarget == 1)
 		{
-			$targetPointLongFigure 	= 1 + ($targetPointPercent / 100); // Target for long should be positive
+			$targetPointLongFigure 	= 1 + (($targetPointPercent / $leverage) / 100); // Target for long should be positive
 			$targetPrice = number_format(($price * $targetPointLongFigure), $getTickSize, '.', '');
 		}
 		else
