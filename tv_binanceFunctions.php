@@ -1224,32 +1224,37 @@ function createShortLimitOrder($symbol, $halfCoins, $firstSale, $user_bnKey, $us
 
 }
 
-function setLeverage($api_key, $secret_key, $symbol, $leverage) {
+
+
+function setLeverage($symbol, $leverage, $user_bnKey, $user_bnSecret) {
     // Create a timestamp for the request
     $timestamp = round(microtime(true) * 1000);
 
     // Create the query string
-    $query_string = 'symbol=' . $symbol .
-                    '&leverage=' . $leverage .
-                   '&amp;timestamp=' . $timestamp;
-	
-                   
+    $query_string = "symbol=$symbol&leverage=$leverage&timestamp=$timestamp";
+
     // Sign the query string
-    $signature = hash_hmac('sha256', $query_string, $secret_key);
+    $signature = hash_hmac('sha256', $query_string, $user_bnSecret);
 
     // Set the request URL
-    $url = 'https://fapi.binance.com/fapi/v1/leverage?' . $query_string . '&signature=' . $signature;
-//return $url;
-    // Set the request headers
-    $headers = array('X-MBX-APIKEY: ' . $api_key);
+    $url = "https://fapi.binance.com/fapi/v1/leverage?$query_string&signature=$signature";
 
-    // Send the request
+    // Set the request headers
+    $headers = array("X-MBX-APIKEY: $user_bnKey");
+
+    // Initialize cURL
     $ch = curl_init();
+
+    // Set cURL options
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_POST, true);
+
+    // Send the request
     $response = curl_exec($ch);
+
+    // Close cURL
     curl_close($ch);
 
     // Decode the JSON string to an array
@@ -1257,7 +1262,6 @@ function setLeverage($api_key, $secret_key, $symbol, $leverage) {
 
     return $result;
 }
-
 
 
 function futuresBalances($api_key, $secret_key, $asset)
