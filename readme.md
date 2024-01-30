@@ -16,19 +16,21 @@ ZOE will take the tradingview alerts, then place them within a database table na
 Tradingview Indicator
 ================================================================
 
-ZOE has her own indicator if desired: Details can be found on the link below
+ZOE has her own free indicator (ZOE-DEGEN) if desired and can be found at Surn Discord group
 
-https://www.tradingview.com/script/5mhMn5Di-Zoe/ 
+7 Day Discord Group Trial: https://discord.gg/jrdWpnkh
 
 If you want to use your own Indicator the following information is requred to be sent to ZOE tradingview alerts:
 
 LONG,BTCUSDT.P,42822,240,43953,46536,41370
+
 SHORT,BTCUSDT.P,42822,240,43953,46536,41370
 
 Indicator for ZOE uses the following format:
 
-LONG,{{ticker}},{{close}},{{interval}},{{plot_5}},{{plot_9}},{{plot_2}}
-SHORT,{{ticker}},{{close}},{{interval}},{{plot_5}},{{plot_9}},{{plot_2}}
+LONG,{{ticker}},{{close}},{{interval}},{{plot_2}},{{plot_1}},{{plot_0}}
+
+SHORT,{{ticker}},{{close}},{{interval}},{{plot_2}},{{plot_1}},{{plot_0}}
 
 <trade>,<symbol>,<price>,<timeline>,<targetPrice>,<High Fib>,<Low Fib>
 
