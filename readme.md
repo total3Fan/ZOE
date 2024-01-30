@@ -37,17 +37,25 @@ Files within ZOE:
 ================================================================
 
 ----tv_dbConfig.php  // database params and BinanceFutures API Details
+
 ----tv_webhook.php   // Webhook file, path to be given to Tradingview Alerts Webhook URL
+
 ----tv_zoeProcess.php // Process file to check database table for any trades that are currently desired to be placed onto the orderbook
+
 ----tv_budgets.php // User preferences of settings for the usage of ZOE on trades, StopLoss information, TargetPoint information, Leverage desired and more.
+
 ----tv_positions.php // Process file for ZOE to check current open trades and move StopLoss if trade has met % increase in accordance with tv_budgets.php settings.
+
 ----tv_clean.php // Process file to remove dead trades, if no SL or TP given it will automatically place them, useful when manually creating trades.
 
 ----tv_binanceFutures.php // functions for ZOE with binancefutures.
+
 ----tv_longcode.php // Include file to list Long trades with tv_zoeProcess.php
+
 ----tv_shortcode.php // Include file to list Short trades with tv_zoeProcess.php
 
 --tv_cronJobs.txt // cron jobs to be created for automation
+
 --tv_mysqlTable.txt // Create Table code to generate the table required for ZOE to be named tradingview_alerts
 
 Setup:
@@ -119,18 +127,23 @@ Donations Welcome
 If you would like to support this development please do so using crypto of your choice below, thank you in advance:
 
 Algorand (ALG)
+
 2GSHYDYHW5PPGZNJM6SEJZZCZ4K6XLFD7D7MQGAVPYMQ2YPQ5MGZ656ILU
 
 Avalanche (AVAX)
+
 0x05d4d6b5d0e8083739ec6f7c2d38c4df23e30378
 
 Bitcoin (BTC)
+
 bc1qmej54v5ah7dal04ynu9wlx3twmvme526zxhtcg 
 
 Dogecoin (DOGE)
+
 DKtWr67b8c31BB9U5NLcUx28HtKvxpZHW7
 
 XRP
+
 rD3Spsysr8mY3tuUSuTyh7okSE7B4hs4PM
 
 
