@@ -80,7 +80,8 @@ Because you are giving a publicly accessable URL to TradingView for your webhook
 
 1. Rename the tv_webhook.php file to something unique e.g. tv_s498fWSjkr.php
 2. When placing files into a folder on your server, again I recommend using a folder name that is again unique e.g. '_d_4fjS9Kdf4/'
-
+3. You can restrict access by only allowing TradingView IP addresses to push data to your webhook.
+(Details here: https://www.tradingview.com/support/solutions/43000529348-about-webhooks/ )
 
 License
 ================================================================
