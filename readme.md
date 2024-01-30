@@ -84,6 +84,29 @@ Because you are giving a publicly accessable URL to TradingView for your webhook
    
 (Details here: https://www.tradingview.com/support/solutions/43000529348-about-webhooks/ )
 
+Disclaimer of Usage
+================================================================
+
+By using this software, you, the user, acknowledge and agree to the following terms:
+
+Usage at Own Risk: You understand and agree that you are using this software entirely at your own risk. The developers of this software shall not be liable for any direct, indirect, incidental, consequential, or punitive damages arising out of your access to, use of, inability to use, or reliance on the software.
+
+
+Responsibility for Reviewing Source Code: You acknowledge that it is your responsibility to review the source code of the software prior to its usage and during its usage. This review is crucial to understand the functioning of the software, identify any potential risks or errors, and ensure that it meets your requirements and expectations.
+
+
+No Warranties: This software is provided "as is," without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose, and non-infringement. In no event shall the authors or copyright holders be liable for any claim, damages, or other liability, whether in an action of contract, tort, or otherwise, arising from, out of, or in connection with the software or the use or other dealings in the software.
+
+
+Compliance with Laws: You agree to use the software in compliance with all applicable laws, regulations, and policies.
+
+
+Modification of Terms: The terms of this disclaimer are subject to change at any time, and it is your responsibility to review these terms regularly to ensure your continued compliance and agreement.
+
+
+By continuing to access or use this software, you signify your acceptance of these terms.
+
+
 License
 ================================================================
 © 2023 Zoe is licensed under Attribution-ShareAlike 4.0 International 
