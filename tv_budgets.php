@@ -15,14 +15,22 @@ $leverage 				= 20;
 
 
 // COMPOUND SETTINGS 1 = On   0 = Off
-
 $compound = 1;
+
+// WHAT % BALANCE TO USE FOR BUDGET PER TRADE DEFAULT IS 2% 
+
+$spendBudgetPercent				= 2;
+
+// WHAT % OF FUTURES BALANCE IS MAXIMUM TO USE FOR ALL TRADES DEFAULT IS 10% 
+
+$maxTradesPercent				= 10;
+
 
 // If you set compound to 0 then following settings apply, otherwise will be ignored
 // SpendBudget is amount in USD including leverage; MaxPairings is max number of trades at one time;
 // Will be ignored if COMPOUND setting is 1
 
-$spendBudget			= 100;
+$spendBudget			= 10;
 $maxPairings 			= 10;
 
 
@@ -49,13 +57,6 @@ $leaveDatabaseTrades 	= 5;
 $cutOffPercent					=  5;
 
 
-// WHAT % BALANCE TO USE FOR BUDGET PER TRADE DEFAULT IS 2% 
-
-$spendBudgetPercent				= 2;
-
-// WHAT % OF FUTURES BALANCE IS MAXIMUM TO USE FOR ALL TRADES DEFAULT IS 10% 
-
-$maxTradesPercent				= 10;
 
 // OVER-RIDE INITIAL STOP LOSS PERCENTAGE
 
@@ -187,13 +188,13 @@ $futuresExposure		= number_format(($futuresBalance * $leverage),0,'.','');
 if($compound == 1)
 {
 
-$spendBudgetPercentCalc	= number_format($spendBudgetPercent / 100,2,'.','');
+$spendBudgetPercentCalc	= number_format($spendBudgetPercent / 100,5,'.','');
 
-$spendBudget			= number_format($futuresExposure * $spendBudgetPercentCalc,0,'.','');
+$spendBudget			= number_format($futuresExposure * $spendBudgetPercentCalc,2,'.','');
 
 $maxTradesPercentCalc	= number_format($maxTradesPercent / 100,2,'.','');
 
-$maxPairingsBudget 		= number_format($futuresExposure * $maxTradesPercentCalc,0,'.','');
+$maxPairingsBudget 		= number_format($futuresExposure * $maxTradesPercentCalc,2,'.','');
 
 $maxPairings 			= number_format($maxPairingsBudget / $spendBudget,0,'.','');
 
@@ -238,7 +239,7 @@ if($debug == 1)
 }
 
 
-$maxBudgetPerPairing 	= number_format(($spendBudget),0,'.','');
+$maxBudgetPerPairing 	= number_format(($spendBudget),2,'.','');
 
 $maxSpendBudget 		= $spendBudget;
 
