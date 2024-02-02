@@ -13,6 +13,8 @@ include('tv_budgets.php');
 
 
 
+
+
 // Read the data sent via POST
 $inputData = file_get_contents('php://input');
 $data = json_decode($inputData, true);
@@ -20,8 +22,11 @@ $data = json_decode($inputData, true);
 // Split the input data into an array
 $values = explode(',', $inputData);
 
+
 // Check if there are 14 elements in the array
 if (count($values) == 7) {
+	
+
     $originalString = $values[1];
     $cleanString = str_replace(".P", "", $originalString);
 
@@ -29,12 +34,16 @@ if (count($values) == 7) {
     $symbol 		= $cleanString;
     $timeline 		= $values[3];
     $price 			= $values[2];
+
     $trade 			= strtolower($values[0]);
 
-    // Extract fib values from the array
-     $priceA = $values[5];
-     $priceB = $values[6];
-	 
+    $ivalues = [$values[4], $values[5], $values[6]];
+
+	sort($ivalues);
+	$priceA = $ivalues[0];
+	$priceB = $ivalues[2];
+	$targetST = $ivalues[1];
+	
 	 if($priceA > $priceB)
 	 {
 		 $priceTop 		= $priceA;
@@ -44,6 +53,7 @@ if (count($values) == 7) {
 		 $priceTop 		= $priceB;
 		 $priceBottom 	= $priceA;
 	 }
+	 
 	 $getTickSize = getTickSize($symbol);
 	 
 	 
@@ -69,7 +79,7 @@ if (count($values) == 7) {
 			}
 			else
 			{
-				$targetPrice 			= $priceBottom;
+				$targetPrice 			= $targetST;
 			}
 		
 		
@@ -101,7 +111,7 @@ if (count($values) == 7) {
 		}
 		else
 		{
-			$targetPrice 			= $priceTop;
+			$targetPrice 			= $targetST;
 		}
 		
 		if($overRideSL == 1)
@@ -164,8 +174,12 @@ $stmt = $conn->prepare($sqlInsertUsage);
 $stmt->bind_param("sssisss", $inputData, $symbol, $trade, $timeline, $stopPriceFloat, $targetPriceFloat, $priceFloat);
 
 // Execute the statement
-$stmt->execute();
-
+// Execute the statement and check for errors
+if ($stmt->execute() === false) {
+    die("Error executing the statement: " . $stmt->error);
+} else {
+    echo $compound. " Record inserted successfully";
+}
 }
 mysqli_close($conn);
 }
