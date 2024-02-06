@@ -19,7 +19,7 @@ $compound = 1;
 
 // WHAT % BALANCE TO USE FOR BUDGET PER TRADE DEFAULT IS 2% 
 
-$spendBudgetPercent				= 2;
+$spendBudgetPercent				= 1;
 
 // WHAT % OF FUTURES BALANCE IS MAXIMUM TO USE FOR ALL TRADES DEFAULT IS 10% 
 
@@ -93,8 +93,11 @@ $multiTargets = 1;
 
 $tradeTargetsByTimeline = [
 
+		4 => 10,
 		5 => 10,
-		10 => 16,
+		8 => 10,
+		10 => 10,
+		11 => 10,
 		15 => 20, 
 		30 => 30, 
 		60 => 50, 
@@ -108,8 +111,11 @@ $tradeTargetsByTimeline = [
 // SECOND NUMBER IS YOUR % TARGET INCLUDING LEVERAGE
 $tradeShortsByTimeline = [
 
+		4 => 10,
 		5 => 10,
-		10 => 16,
+		8 => 10,
+		10 => 10,
+		11 => 10,
 		15 => 20, 
 		30 => 30, 
 		60 => 50, 
@@ -136,9 +142,10 @@ $tradeShortsByTimeline = [
 $profitThresholdsLong =   [
 								
 								 
-								['min' => 15, 'max' => 25, 'desiredProfit' => 2],
-								['min' => 25, 'max' => 300, 'desiredProfit' => 5],
-								['min' => 300, 'max' => 600, 'desiredProfit' => 150],
+								['min' => 8, 'max' => 12, 'desiredProfit' => 5],
+								['min' => 12, 'max' => 20, 'desiredProfit' => 10],
+								['min' => 20, 'max' => 100, 'desiredProfit' => 15],
+								['min' => 100, 'max' => 600, 'desiredProfit' => 150],
 								['min' => 600, 'max' => 800, 'desiredProfit' => 500],
 								['min' => 800, 'max' => 1040, 'desiredProfit' => 700],
 								['min' => 1680, 'max' => 1760, 'desiredProfit' => 1520],
@@ -163,9 +170,11 @@ $profitThresholdsShort =   [
 									
 									
 								 
-								['min' => 15, 'max' => 25, 'desiredProfit' => 2],
-								['min' => 25, 'max' => 300, 'desiredProfit' => 5],
-								['min' => 300, 'max' => 600, 'desiredProfit' => 150],
+								 
+								['min' => 8, 'max' => 12, 'desiredProfit' => 5],
+								['min' => 12, 'max' => 20, 'desiredProfit' => 10],
+								['min' => 20, 'max' => 100, 'desiredProfit' => 15],
+								['min' => 100, 'max' => 600, 'desiredProfit' => 150],
 								['min' => 600, 'max' => 800, 'desiredProfit' => 500],
 								['min' => 800, 'max' => 1040, 'desiredProfit' => 700],
 								['min' => 1680, 'max' => 1760, 'desiredProfit' => 1520],
@@ -204,13 +213,15 @@ $maxPairings 			= number_format($maxPairingsBudget / $spendBudget,0,'.','');
 $cutOff 						= ($futuresBalance * ($cutOffPercent / 100));
 
 
+
 // For short positions
-$stopLossShortFigure = 1 + ($stopLossPercent / 100); // Stop loss for short should be positive
-$targetPointShortFigure = 1 - ($targetPointPercent / 100); // Target for short should be negative
+$stopLossShortFigure = 1 + (($stopLossPercent / $leverage) / 100); // Stop loss for short should be positive
+$targetPointShortFigure = 1 - (($targetPointPercent / $leverage) / 100); // Target for short should be negative
 
 // For long positions
-$stopLossLongFigure = 1 - ($stopLossPercent / 100); // Stop loss for long should be negative
-$targetPointLongFigure = 1 + ($targetPointPercent / 100); // Target for long should be positive
+$stopLossLongFigure = 1 - (($stopLossPercent / $leverage) / 100); // Stop loss for long should be negative
+$targetPointLongFigure = 1 + (($targetPointPercent / $leverage) / 100); // Target for long should be positive
+
 
 
 
