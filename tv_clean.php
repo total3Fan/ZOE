@@ -161,7 +161,7 @@ include('tv_budgets.php');
 													flush();
 												}
 												if ($takeProfitPresent == 0) {
-													$targetPrice = number_format(($currentPrice * $targetPointLongFigure), $getTickSize, '.', '');
+													$targetPrice = number_format(($entryPrice * $targetPointLongFigure), $getTickSize, '.', '');
 													
 													
 													
@@ -201,7 +201,7 @@ include('tv_budgets.php');
 													flush();
 												}
 												if ($takeProfitPresent == 0) {
-													$targetPrice = number_format(($currentPrice * $targetPointShortFigure), $getTickSize, '.', '');
+													$targetPrice = number_format(($entryPrice * $targetPointShortFigure), $getTickSize, '.', '');
 													
 													$createTargetOrder = createShortTargetOrder($symbol, $targetPrice, $user_bnKey, $user_bnSecret);
 													if($debug == 1)
