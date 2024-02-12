@@ -11,7 +11,7 @@ ZOE will take the tradingview alerts, then place them within a database table na
 2. Place trades onto orderbook within binancefutures with both TargetPoints and StopLoss
 3. Scan current trades to see if % profit has been achieved to move the StopLoss up to secure profits.
 4. Scan order book for any dead trades sitting and clear them automatically.
-5. Scan trades and if a LONG is currently in play and a SHORT is given, ZOE will automatically remove the long and place the SHORT.
+5. Scan trades and if a LONG is currently in play and a SHORT is given, ZOE will optionally automatically remove the long and place the SHORT.
 
 Tradingview Indicator
 ================================================================
