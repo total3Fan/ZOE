@@ -22,14 +22,29 @@ $getLotSize = getLotSize($symbol);
 $currentPrice = getCurrentPrice($symbol);
 
 
-$stopPrice = number_format(($currentPrice * $stopLossLongFigure), $getTickSize, '.', '');
-$targetPrice = number_format(($currentPrice * $targetPointLongFigure), $getTickSize, '.', '');
+$getStopLossSQL = "SELECT tradingview_target, tradingview_stop FROM tradingview_alerts WHERE tradingview_symbol = '$symbol'";
+$resultA = $conn->query($getStopLossSQL);
+if ($resultA) {
+    while ($getQuickDat = $resultA->fetch_assoc()) {
+        $fibSupport  = $getQuickDat['tradingview_stop'];
+        $fibTarget  = $getQuickDat['tradingview_target'];
+    }
+    $resultA->free(); // Free the result set
+} else {
+    // Handle the case where the query fails
+   
+}
+															
+
+
+$stopPrice = number_format($fibSupport, $getTickSize, '.', '');
+$targetPrice = number_format($fibTarget, $getTickSize, '.', '');
 
 
 
 
 
-
+$checkLongCoins = $balCheckLong[$symbol];
 $cancelBuy = $targetPrice;
 
 // Get Position Info
@@ -44,13 +59,18 @@ $price = $positionInfo[0]['entryPrice'];
 $profitAmt = $positionInfo[0]['unRealizedProfit'];
 $exposureCheck = $coins * $price;
 
-if($killShort == 1 && $SHORTcoins > 0)
+if($hedgeTrades == 1 && $SHORTcoins > 0)
 {
-$makeOrder = closeShortFuturesOrder($symbol, $SHORTcoins, $user_bnKey, $user_bnSecret);
-$openOrdersCheck--;
+	$openOrdersCheck--;
+}
+elseif($killShort == 1 && $SHORTcoins > 0)
+{
+	$makeOrder = closeShortFuturesOrder($symbol, $SHORTcoins, $user_bnKey, $user_bnSecret);
+	$openOrdersCheck--;
 }
 
-if ($positionSide == 'LONG' && $coins == 0 && $openOrdersCheck < $maxPairings) 
+
+if ($positionSide == 'LONG' && $coins == 0 && $openOrdersCheck < $maxPairings && $checkLongCoins == 0) 
 	{
 
 
