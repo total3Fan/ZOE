@@ -64,7 +64,7 @@ if (count($values) == 7) {
 
 	 if($trade == 'short')
 	 {
-		 $stopLossShortFigure 	= 1 + ($stopLossPercent / 100); // Stop loss for short should be positive
+		 $stopLossShortFigure 	= 1 + (($stopLossPercent / $leverage)  / 100); // Stop loss for short should be positive
 				
 		 if($multiTargets == 1)
 			{
@@ -85,34 +85,18 @@ if (count($values) == 7) {
 		
 		if($overRideSL == 1)
 		{
-			if($stopLossFIBS == 1)
-			{
-				$shortSLprice = ($priceTop * $stopLossShortFigure);
-			}
-			else
-			{
-				$shortSLprice = ($price * $stopLossShortFigure);
-			}
-			$stopPrice = number_format(($shortSLprice), $getTickSize, '.', '');
+			$stopPrice = number_format(($priceTop * $stopLossShortFigure), $getTickSize, '.', '');
 		}
 		else
 		{
-			if($stopLossFIBS == 1)
-			{
-				$shortSLprice = ($priceTop * 0.5);
-			}
-			else
-			{
-				$shortSLprice = ($price * 0.5);
-			}
-			$stopPrice = number_format(($shortSLprice), $getTickSize, '.', '');
+			$stopPrice = number_format(($priceTop * 0.5), $getTickSize, '.', '');
 		}
 		
 	 }
 	 elseif($trade == 'long')
 	 {
 		 
-		$stopLossLongFigure 	= 1 - ($stopLossPercent / 100); // Stop loss for long should be negative
+		$stopLossLongFigure 	= 1 - (($stopLossPercent / $leverage) / 100); // Stop loss for long should be negative
 		if($multiTargets == 1)
 		 {
 			 $targetPointPercent  	=   $tradeTargetsByTimeline[$timeline];
@@ -132,27 +116,11 @@ if (count($values) == 7) {
 		
 		if($overRideSL == 1)
 		{
-			if($stopLossFIBS == 1)
-			{
-				$longSLprice = ($priceBottom * $stopLossLongFigure);
-			}
-			else
-			{
-				$longSLprice = ($price * $stopLossLongFigure);
-			}
-			$stopPrice = number_format(($longSLprice), $getTickSize, '.', '');
+			$stopPrice = number_format(($priceBottom * $stopLossLongFigure), $getTickSize, '.', '');
 		}
 		else
 		{
-			if($stopLossFIBS == 1)
-			{
-				$longSLprice = ($priceBottom * 0.5);
-			}
-			else
-			{
-				$longSLprice = ($price * 0.5);
-			}
-			$stopPrice = number_format(($longSLprice), $getTickSize, '.', '');
+			$stopPrice = number_format(($priceBottom * 0.5), $getTickSize, '.', '');
 		}
 		
 	 }
