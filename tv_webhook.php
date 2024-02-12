@@ -85,11 +85,27 @@ if (count($values) == 7) {
 		
 		if($overRideSL == 1)
 		{
-			$stopPrice = number_format(($priceTop * $stopLossShortFigure), $getTickSize, '.', '');
+			if($stopLossFIBS == 1)
+			{
+				$shortSLprice = ($priceTop * $stopLossShortFigure);
+			}
+			else
+			{
+				$shortSLprice = ($price * $stopLossShortFigure);
+			}
+			$stopPrice = number_format(($shortSLprice), $getTickSize, '.', '');
 		}
 		else
 		{
-			$stopPrice = number_format(($priceTop * 0.5), $getTickSize, '.', '');
+			if($stopLossFIBS == 1)
+			{
+				$shortSLprice = ($priceTop * 0.5);
+			}
+			else
+			{
+				$shortSLprice = ($price * 0.5);
+			}
+			$stopPrice = number_format(($shortSLprice), $getTickSize, '.', '');
 		}
 		
 	 }
@@ -116,11 +132,27 @@ if (count($values) == 7) {
 		
 		if($overRideSL == 1)
 		{
-			$stopPrice = number_format(($priceBottom * $stopLossLongFigure), $getTickSize, '.', '');
+			if($stopLossFIBS == 1)
+			{
+				$longSLprice = ($priceBottom * $stopLossLongFigure);
+			}
+			else
+			{
+				$longSLprice = ($price * $stopLossLongFigure);
+			}
+			$stopPrice = number_format(($longSLprice), $getTickSize, '.', '');
 		}
 		else
 		{
-			$stopPrice = number_format(($priceBottom * 0.5), $getTickSize, '.', '');
+			if($stopLossFIBS == 1)
+			{
+				$longSLprice = ($priceBottom * 0.5);
+			}
+			else
+			{
+				$longSLprice = ($price * 0.5);
+			}
+			$stopPrice = number_format(($longSLprice), $getTickSize, '.', '');
 		}
 		
 	 }
