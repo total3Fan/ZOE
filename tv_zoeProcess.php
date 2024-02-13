@@ -33,7 +33,7 @@ $getTradeQuick = "SELECT
     tradingview_stop,
     tradingview_trade
 FROM 
-    taapi_tradingview_alerts 
+    tradingview_alerts 
 
 WHERE 
   
