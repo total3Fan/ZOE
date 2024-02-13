@@ -6,6 +6,6 @@ CRON JOBS TO BE CREATED, FEEL FREE TO UPDATE TIMES FOR AUTOMATION
 
 */2 * * * * /usr/bin/php8.1 /var/www/html/_<yourFolder>/tv_zoeProcess.php
 
-*/3 * * * * /usr/bin/php8.1 /var/www/html/_<yourFolder>/tv_positions.php
+*/2 * * * * /usr/bin/php8.1 /var/www/html/_<yourFolder>/tv_positions.php
 
-*/9 * * * * /usr/bin/php8.1 /var/www/html/_<yourFolder>/tv_clean.php
+*/5 * * * * /usr/bin/php8.1 /var/www/html/_<yourFolder>/tv_clean.php
