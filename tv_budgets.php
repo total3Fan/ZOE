@@ -26,15 +26,15 @@ $spendBudgetPercent				= 1;
 
 // WHAT % OF FUTURES BALANCE IS MAXIMUM TO USE FOR ALL TRADES DEFAULT IS 10% 
 
-$maxTradesPercent				= 10;
+$maxTradesPercent				= 25;
 
 
 // If you set compound to 0 then following settings apply, otherwise will be ignored
 // SpendBudget is amount in USD including leverage; MaxPairings is max number of trades at one time;
 // Will be ignored if COMPOUND setting is 1
 
-$spendBudget			= 10;
-$maxPairings 			= 10;
+$spendBudget			= 100;
+$maxPairings 			= 15;
 
 
 
@@ -62,7 +62,7 @@ $cutOffPercent					=  5;
 // STOP LOSS ON FIBS OR PRICE
 // 1 = FIBS  0 = PRICE
 
-$stopLossFIBS = 1;
+$stopLossFIBS = 0;
 
 // OVER-RIDE INITIAL STOP LOSS PERCENTAGE
 
@@ -70,7 +70,7 @@ $overRideSL = 1;
 // DEFAULT IS 0.5% : YOU CAN PLACE A NEW PERCENTAGE IF DESIRED (EXCLUDES LEVERAGE)
 // STOP IS NOT FROM ENTRY PRICE BUT FROM THE 1 FIB AT THE TIME OF ENTRY
 
-$stopLossPercent = 5; // 5%
+$stopLossPercent = 100; // 100%
 
 
 // OVER-RIDE INITIAL TARGET PERCENTAGE
@@ -81,7 +81,7 @@ $overRideTarget = 1;
 // TARGET IS FROM ENTRY PRICE 
 // ONLY APPLICABLE IF $multiTargets = 0;
 
-$targetPointPercent = 25; // 10%
+$targetPointPercent = 10; // 10%
 
 
 
