@@ -25,9 +25,9 @@ $conn = mysqli_connect($hostname, $username, $password, $database);
 							
 				
 				
+// Prepare the SELECT statement with a placeholder
 $getTradeQuick = "SELECT 
     tradingview_symbol,
- 
     tradingview_price,
     tradingview_target,
     tradingview_stop,
@@ -35,34 +35,18 @@ $getTradeQuick = "SELECT
 FROM 
     tradingview_alerts 
 
-WHERE 
-  
-    tradingview_timeline > 0
-ORDER by 
-tradingview_trade ASC
-";
+ORDER BY 
+    tradingview_trade ASC";
+
+$stmt = $conn->prepare($getTradeQuick);
 
 
 
-$getTradeQuickR = $conn->query($getTradeQuick);
-					
-					
-					
-					$symbolsData = [];
-					
-					$symbolArray = array();
-					$stopLossArray = array();
-					while ($getQuickDat = $getTradeQuickR->fetch_assoc()) {
-						
-						
-						$symbol = $getQuickDat['tradingview_symbol'];
-						
-						$predict = strtolower($getQuickDat['tradingview_trade']);
+// Execute the statement
+$stmt->execute();
 
-						// Add the prediction to the array without additional conditions
-						$symbolArray[$symbol] = $predict;
-						
-					}
+// Get the result
+$result = $stmt->get_result();
 
 $symbolsData = [];
 $symbolArray = [];
@@ -195,13 +179,13 @@ $openOrdersCheck = 0;
 						
 							
 // Prepare the DELETE statement outside the loop
-$updateQuick = "DELETE FROM tradingview_alerts WHERE tradingview_symbol = ?";
+$updateQuick = "DELETE FROM tradingview_alerts WHERE tradingview_timeline >= ? AND tradingview_symbol = ? AND tradingview_updated < NOW() - INTERVAL ? MINUTE";
 $stmt = $conn->prepare($updateQuick);
 
 // Iterate over each symbol
 foreach($symbolArray as $symbol => $tradeSide) {
     // Bind parameters to the statement for each symbol
-    $stmt->bind_param("isi", $symbol);
+    $stmt->bind_param("isi", $tradeTimelineMin, $symbol, $leaveDatabaseTrades);
 
     // Execute the statement
     $stmt->execute();
@@ -210,6 +194,16 @@ foreach($symbolArray as $symbol => $tradeSide) {
 }
 
 
+
+// Prepare a DELETE statement with a placeholder for the interval
+$cleanQuick = "DELETE FROM tradingview_alerts WHERE tradingview_updated < NOW() - INTERVAL ? MINUTE";
+$stmt = $conn->prepare($cleanQuick);
+
+// Bind the parameter to the statement
+$stmt->bind_param("i", $leaveDatabaseTrades);
+
+// Execute the statement
+$stmt->execute();
 mysqli_close($conn);
 
 
