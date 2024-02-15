@@ -18,7 +18,7 @@ Tradingview Indicator
 
 ZOE has her own free indicator (ZOE-DEGEN) if desired and can be found at Surfn Discord group
 
-7 Day Discord Group Trial: https://discord.gg/jrdWpnkh
+7 Day Discord Group Trial: https://discord.gg/ZuAhg2Gb
 
 If you want to use your own Indicator the following information is requred to be sent to ZOE tradingview alerts:
 
