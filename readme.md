@@ -16,9 +16,9 @@ ZOE will take the tradingview alerts, then place them within a database table na
 Tradingview Indicator
 ================================================================
 
-ZOE has her own free indicator (ZOE-DEGEN) if desired and can be found at Surfn Discord group
+ZOE has her own free indicator (ZOE-DEGEN) if desired and can be found at 
 
-7 Day Discord Group Trial: https://discord.gg/ZuAhg2Gb
+https://www.tradingview.com/script/IJTFzlmS-ZOE/
 
 If you want to use your own Indicator the following information is requred to be sent to ZOE tradingview alerts:
 
